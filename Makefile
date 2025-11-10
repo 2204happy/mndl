@@ -2,30 +2,34 @@
 
 all: asm c cpp hs java rs
 
-asm:
+asm: dirs
 	nasm -f elf64 -o mndlasm.o -w-label-orphan src/mndl.asm && ld -o bin/mndlasm mndlasm.o
 	rm mndlasm.o
 
-c:
+c: dirs
 	gcc src/mndl.c -lm -o bin/mndlc
 	
-cpp:
+cpp: dirs
 	g++ src/mndl.cpp -o bin/mndlcpp
 
-hs:
+hs: dirs
 	ghc src/mndl.hs -o bin/mndlhs -outputdir .
 	rm Main.hi Main.o
 
-java:
+java: dirs
 	javac src/Mndl.java -d bin
 	
-rs:
+rs: dirs
 	rustc src/mndl.rs -o bin/mndlrs
 
 
+dirs:
+	mkdir bin test
+	
 clean:
 	rm -f bin/*
 	rm -f test/*
+	rmdir bin test
 	
 run:
 	echo "***mndlasm***";\
