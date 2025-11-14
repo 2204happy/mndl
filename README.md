@@ -18,6 +18,10 @@ To run all of the programs sequentially run
 
 `make run`
 
+To time all of the programs run
+
+`make time`
+
 To clean the copy of the repository run
 
 `make clean`

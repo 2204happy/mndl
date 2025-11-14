@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 .PHONY: all clean run test
 
 all: asm c cpp hs java rs
@@ -48,6 +50,24 @@ run:
 	python3 src/mndl.py;\
 	echo "***mndlrs***";\
 	bin/mndlrs
+	
+time:
+	echo "***mndlasm***";\
+	time bin/mndlasm > /dev/null;\
+	echo "***mndlc***";\
+	time bin/mndlc > /dev/null;\
+	echo "***mndlcpp***";\
+	time bin/mndlcpp > /dev/null;\
+	echo "***mndlhs***";\
+	time bin/mndlhs > /dev/null;\
+	echo "***Mndl.class***";\
+	time java -cp bin Mndl > /dev/null;\
+	echo "***mndl.lua***";\
+	time lua src/mndl.lua > /dev/null;\
+	echo "***mndl.py***";\
+	time python3 src/mndl.py > /dev/null;\
+	echo "***mndlrs***";\
+	time bin/mndlrs > /dev/null
 
 test:
 	bin/mndlasm > test/asm
